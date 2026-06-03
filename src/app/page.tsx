@@ -3,9 +3,7 @@ import Image from "next/image";
 const badges = [
   { label: "PHARMACY EDUCATION", icon: "Rx", className: "badge-one", delay: "0s" },
   { label: "CERTIFICATIONS", icon: "C", className: "badge-two", delay: ".1s" },
-  { label: "PROFESSIONAL GROWTH", icon: "G", className: "badge-three", delay: ".2s" },
   { label: "CLINICAL EXCELLENCE", icon: "+", className: "badge-four", delay: ".3s" },
-  { label: "INDUSTRY READY", icon: "IR", className: "badge-five", delay: ".4s" },
   { label: "EXPERT MENTORS", icon: "M", className: "badge-six optional-badge", delay: ".5s" },
   { label: "CPD LEARNING", icon: "L", className: "badge-seven optional-badge", delay: ".6s" },
   { label: "REGULATORY AFFAIRS", icon: "RA", className: "badge-eight optional-badge", delay: ".7s" },
@@ -14,10 +12,30 @@ const badges = [
 ];
 
 const pathways = [
-  "Clinical Pharmacist",
-  "Regulatory Specialist",
-  "Pharmacovigilance Lead",
-  "Hospital Pharmacy",
+  {
+    title: "Clinical Pharmacist",
+    detail: "Patient care, therapy reviews, and clinical decision support.",
+    image: "/assets/pharmacy-consultation.jpg",
+    alt: "Clinical pharmacist consulting with a patient",
+  },
+  {
+    title: "Regulatory Specialist",
+    detail: "Compliance pathways, submissions, and quality systems.",
+    image: "/assets/pharmacy-regulatory.jpg",
+    alt: "Pharmacy regulatory documentation and medicine review",
+  },
+  {
+    title: "Pharmacovigilance Lead",
+    detail: "Drug safety, signal detection, and risk communication.",
+    image: "/assets/pharmacy-lab.jpg",
+    alt: "Pharmacist reviewing drug safety data in a modern lab",
+  },
+  {
+    title: "Hospital Pharmacy",
+    detail: "Ward rounds, dispensing systems, and medication safety.",
+    image: "/assets/pharmacy-classroom.jpg",
+    alt: "Pharmacy students learning in a modern clinical classroom",
+  },
 ];
 
 const courses = [
@@ -29,18 +47,33 @@ const courses = [
 ];
 
 const blogs = [
-  ["The Future of Pharmacy: Trends Shaping the Industry", "Strategy"],
-  ["Understanding Drug Interactions in Clinical Practice", "Clinical"],
-  ["How Pharmacists Can Improve Patient Outcomes", "Patient Care"],
+  {
+    title: "The Future of Pharmacy: Trends Shaping the Industry",
+    tag: "Strategy",
+    image: "/assets/pharmacy-classroom.jpg",
+    alt: "Modern pharmacy education classroom",
+  },
+  {
+    title: "Understanding Drug Interactions in Clinical Practice",
+    tag: "Clinical",
+    image: "/assets/pharmacy-lab.jpg",
+    alt: "Pharmacist reviewing clinical drug safety data",
+  },
+  {
+    title: "How Pharmacists Can Improve Patient Outcomes",
+    tag: "Patient Care",
+    image: "/assets/pharmacy-consultation.jpg",
+    alt: "Clinical pharmacist consultation for patient care",
+  },
 ];
 
 const books = [
-  ["Pharmacology Essentials", "6th Edition"],
-  ["Clinical Pharmacy Handbook", "3rd Edition"],
-  ["Pharmaceutical Care Practice", "2nd Edition"],
-  ["Pharmacotherapy Principles", "5th Edition"],
-  ["Goodman & Gilman's Pharmacological Basis", "14th Edition"],
-  ["Regulatory Pharmacy Review", "2026 Guide"],
+  ["Pharmacology Essentials", "6th Edition", "Core Text"],
+  ["Clinical Pharmacy Handbook", "3rd Edition", "Practice"],
+  ["Pharmaceutical Care Practice", "2nd Edition", "Patient Care"],
+  ["Pharmacotherapy Principles", "5th Edition", "Therapeutics"],
+  ["Goodman & Gilman's Pharmacological Basis", "14th Edition", "Reference"],
+  ["Regulatory Pharmacy Review", "2026 Guide", "Exam Prep"],
 ];
 
 const revisions = [
@@ -75,11 +108,20 @@ export default function Home() {
             <a href="#pathways">Careers</a>
             <a href="#articles">Insights</a>
             <a href="#about">About</a>
+            <a href="#contact">Contact</a>
           </div>
-          <a className="nav-cta" href="#brochure">Request a Brochure</a>
+          <a className="nav-cta" href="#contact">Request a Brochure</a>
         </nav>
 
         <div className="hero-inner" id="top">
+          <div className="hero-line-boxes" aria-hidden="true">
+            <span className="line-box box-a" />
+            <span className="line-box box-b" />
+            <span className="line-box box-c" />
+            <span className="line-box box-d" />
+            <span className="line-box box-e" />
+            <span className="line-box box-f" />
+          </div>
           <div className="badge-field" aria-hidden="true">
             {badges.map((badge) => (
               <span
@@ -105,7 +147,7 @@ export default function Home() {
               programs, and career advancement opportunities.
             </p>
             <div className="hero-actions" id="brochure">
-              <a className="button primary" href="#footer">
+              <a className="button primary" href="#contact">
                 Request Brochure
               </a>
               <a className="button secondary" href="#courses">
@@ -124,11 +166,23 @@ export default function Home() {
         />
         <div className="pathway-grid">
           {pathways.map((pathway, index) => (
-            <article className="image-card" key={pathway}>
-              <div className={`visual visual-${index + 1}`} />
+            <article className="image-card" key={pathway.title}>
+              <div className="visual">
+                <Image
+                  src={pathway.image}
+                  alt={pathway.alt}
+                  width={640}
+                  height={430}
+                  sizes="(max-width: 767px) 100vw, (max-width: 1180px) 50vw, 25vw"
+                />
+              </div>
               <div>
                 <span className="mini-icon">{index + 1}</span>
-                <h3>{pathway}</h3>
+                <div>
+                  <h3>{pathway.title}</h3>
+                  <p>{pathway.detail}</p>
+                  <a href="#contact">Explore path</a>
+                </div>
               </div>
             </article>
           ))}
@@ -160,12 +214,20 @@ export default function Home() {
           action="View All Blogs"
         />
         <div className="blog-grid">
-          {blogs.map(([title, tag], index) => (
-            <article className="blog-card" key={title}>
-              <div className={`blog-visual blog-${index + 1}`} />
+          {blogs.map((blog) => (
+            <article className="blog-card" key={blog.title}>
+              <div className="blog-visual">
+                <Image
+                  src={blog.image}
+                  alt={blog.alt}
+                  width={780}
+                  height={520}
+                  sizes="(max-width: 900px) 100vw, 33vw"
+                />
+              </div>
               <div className="blog-body">
-                <span>{tag}</span>
-                <h3>{title}</h3>
+                <span>{blog.tag}</span>
+                <h3>{blog.title}</h3>
                 <a href="#footer">Read More</a>
               </div>
             </article>
@@ -180,11 +242,12 @@ export default function Home() {
           action="View All Books"
         />
         <div className="book-carousel" aria-label="Recommended pharmacy books">
-          {books.map(([title, edition], index) => (
+          {books.map(([title, edition, category], index) => (
             <article className="book-item" key={title}>
               <div className={`book-cover cover-${index + 1}`}>
-                <span>Kingstown</span>
+                <span>{category}</span>
                 <strong>{title}</strong>
+                <em>{edition}</em>
               </div>
               <div>
                 <h3>{title}</h3>
@@ -274,6 +337,71 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section contact-section" id="contact">
+        <div className="contact-panel">
+          <div className="contact-copy">
+            <p className="eyebrow">Contact Us</p>
+            <h2>Ready to build your pharmacy career plan?</h2>
+            <p>
+              Send a quick note and our admissions team will help you choose
+              the right course, certification path, and next step.
+            </p>
+            <div className="contact-trust">
+              <span>Response within 24 hours</span>
+              <span>Free course guidance</span>
+            </div>
+          </div>
+          <form className="contact-form">
+            <div className="form-row">
+              <label htmlFor="name">Full name</label>
+              <input id="name" name="name" type="text" placeholder="Your name" />
+            </div>
+            <div className="form-row">
+              <label htmlFor="phone">Phone number</label>
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                placeholder="Your phone number"
+              />
+            </div>
+            <div className="form-row">
+              <label htmlFor="email-contact">Email address</label>
+              <input
+                id="email-contact"
+                name="email"
+                type="email"
+                placeholder="you@example.com"
+              />
+            </div>
+            <div className="form-row">
+              <label htmlFor="interest">Course interest</label>
+              <select id="interest" name="interest" defaultValue="">
+                <option value="" disabled>
+                  Select a program
+                </option>
+                <option>Pharmacology Fundamentals</option>
+                <option>Clinical Pharmacy Practice</option>
+                <option>Drug Safety & Pharmacovigilance</option>
+                <option>Pharmacy Management</option>
+              </select>
+            </div>
+            <div className="form-row form-row-wide">
+              <label htmlFor="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                rows={4}
+                placeholder="Tell us what you want to achieve"
+              />
+            </div>
+            <button className="contact-submit" type="submit">
+              Send Inquiry
+            </button>
+          </form>
+        </div>
+      </section>
+
       <footer className="footer" id="footer">
         <div className="footer-inner">
           <div>
@@ -311,6 +439,22 @@ export default function Home() {
           </form>
         </div>
       </footer>
+
+      <a
+        className="whatsapp-float"
+        href="https://wa.me/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat with us on WhatsApp"
+      >
+        <Image
+          src="/assets/wp%20icon1.png"
+          alt=""
+          width={44}
+          height={44}
+          aria-hidden="true"
+        />
+      </a>
     </main>
   );
 }
